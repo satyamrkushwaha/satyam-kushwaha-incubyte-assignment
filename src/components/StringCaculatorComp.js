@@ -1,18 +1,31 @@
+// src/StringCalculatorComponent.js
 import React, { useState } from 'react';
-
+import add from '../utils/stringCalculator';
 
 const StringCalculatorComponent = () => {
     const [input, setInput] = useState('');
+    const [result, setResult] = useState(null);
+    const [error, setError] = useState(null);
 
     const handleChange = (event) => {
         setInput(event.target.value);
     };
 
-   
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        try {
+            const sum = add(input);
+            setResult(sum);
+            setError(null);
+        } catch (e) {
+            setResult(null);
+            setError(e.message);
+        }
+    };
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <textarea
                     value={input}
                     onChange={handleChange}
@@ -23,8 +36,8 @@ const StringCalculatorComponent = () => {
                 <br />
                 <button type="submit">Calculate</button>
             </form>
-            <p>Result:</p>
-         <p style={{color: 'red'}}>Error:</p>
+            {result !== null && <p>Result: {result}</p>}
+            {error && <p style={{color: 'red'}}>Error: {error}</p>}
         </div>
     );
 };

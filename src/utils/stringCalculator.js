@@ -2,6 +2,7 @@ function add(numbers) {
     if (numbers === "") {
         return 0;
     }
+    numbers = numbers.trim();
 
     let delimiter = /[\n,]/;
     if (numbers.startsWith("//")) {
