@@ -1,4 +1,3 @@
-// src/StringCalculatorComponent.js
 import React, { useState } from 'react';
 import add from '../utils/stringCalculator';
 
